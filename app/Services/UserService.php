@@ -2,9 +2,7 @@
 
 namespace App\Services;
 
-use App\Models\User;
 use App\Repositories\UserRepository;
-use Illuminate\Suppport\Collection;
 
 class UserService {
     protected $userRepository;

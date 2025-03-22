@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <div class="h-screen bg-slate-500">
+    <div >
         <h1 class="text-center text-white">MANAGER</h1>
     </div>
 @endsection
