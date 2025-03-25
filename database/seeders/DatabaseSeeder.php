@@ -16,5 +16,14 @@ class DatabaseSeeder extends Seeder
             $this->call([
                 UserSeeder::class,
             ]);
+            $this->call([
+                SupplierSeeder::class,
+                ]);
+            $this->call([
+                CategoriesSeeder::class,
+            ]);
+            $this->call([
+                MedicineMasterSeeder::class,    
+            ]);
     }
 }
