@@ -71,9 +71,19 @@
                 </a>
                 <ul id="account-dropdown" class="ml-6 mt-2 hidden">
                     <li class="mb-2">
-                        <a href="#" class="flex items-center p-2 hover:bg-blue-700 rounded">
-                            Account
-                        </a>
+                        @if (Auth::user()->role->value == 'employee')
+                            <a href="/employee/change-profile" class="flex items-center p-2 hover:bg-blue-700 rounded">
+                                Account
+                            </a>
+                        @elseif (Auth::user()->role->value == 'admin')
+                            <a href="/admin/change-profile" class="flex items-center p-2 hover:bg-blue-700 rounded">
+                                Account
+                            </a>
+                        @elseif (Auth::user()->role->value == 'manager')
+                            <a href="/manager/change-profile" class="flex items-center p-2 hover:bg-blue-700 rounded">
+                                Account
+                            </a>
+                        @endif
                     </li>
                     <li class="mb-2">
                         <form action="/auth/logout" method="POST">

@@ -29,6 +29,9 @@ Route::middleware("ValidationUser")->group(function () {
 
     Route::middleware("Role:employee")->group(function () {
     Route::get("/employee/dashboard",[EmployeeController::class,"dashboard"])->name("employee.dashboard");
+    Route::get("/employee/change-profile",[AuthenticateController::class,"formChangeProfile"])->name("");
+    Route::put("/employee/update/change-profile",[AuthenticateController::class,"changeProfile"])->name("");
+    Route::put("/employee/update/change-password",[AuthenticateController::class,"changePassword"])->name("");
     });
 
     Route::middleware("Role:manager")->group(function () {
