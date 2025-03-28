@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\MedicineMasterModel;
 
 class BatchDrugsModel extends Model
 {
@@ -16,4 +17,31 @@ class BatchDrugsModel extends Model
         'medicine_id'
     ];
     public $timestamps = true;
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::created(function ($batch) {
+            $medicine = MedicineMasterModel::find($batch->medicine_id);
+            if ($medicine) {
+                $medicine->increment('stock', $batch->batch_stock);
+            }
+        });
+
+        static::updated(function ($batch) {
+            $oldBatch = $batch->getOriginal();
+            $medicine = MedicineMasterModel::find($batch->medicine_id);
+            if ($medicine) {
+                $medicine->increment('stock', $batch->batch_stock - $oldBatch['batch_stock']);
+            }
+        });
+
+        static::deleted(function ($batch) {
+            $medicine = MedicineMasterModel::find($batch->medicine_id);
+            if ($medicine) {
+                $medicine->decrement('stock', $batch->batch_stock);
+            }
+        });
+    }
 }

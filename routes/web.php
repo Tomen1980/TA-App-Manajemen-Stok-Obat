@@ -32,6 +32,11 @@ Route::middleware("ValidationUser")->group(function () {
     Route::get("/employee/change-profile",[AuthenticateController::class,"formChangeProfile"])->name("");
     Route::put("/employee/update/change-profile",[AuthenticateController::class,"changeProfile"])->name("");
     Route::put("/employee/update/change-password",[AuthenticateController::class,"changePassword"])->name("");
+
+    //drugs
+    Route::get("/employee/drugs/stock-list",[EmployeeController::class,"listdrugs"])->name("");
+    Route::get("/employee/drugs/stock-list/{id}/batch-drugs",[EmployeeController::class,"listBatchDrugs"])->name("");
+    Route::delete("/employee/drugs/stock-list/{id}/batch-drugs/{idBatch}",[EmployeeController::class,"deleteBatchDrugs"])->name("");
     });
 
     Route::middleware("Role:manager")->group(function () {

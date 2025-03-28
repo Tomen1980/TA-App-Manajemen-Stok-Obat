@@ -25,5 +25,8 @@ class DatabaseSeeder extends Seeder
             $this->call([
                 MedicineMasterSeeder::class,    
             ]);
+            $this->call([
+                BatchDrugsSeeder::class,
+            ]);
     }
 }
