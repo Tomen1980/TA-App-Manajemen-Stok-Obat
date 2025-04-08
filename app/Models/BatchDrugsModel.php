@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\MedicineMasterModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class BatchDrugsModel extends Model
 {
@@ -17,6 +18,10 @@ class BatchDrugsModel extends Model
         'medicine_id'
     ];
     public $timestamps = true;
+
+    public function medicineMaster(): BelongsTo{
+        return $this->belongsTo(MedicineMasterModel::class,'medicine_id','id');
+    }
 
     protected static function boot()
     {

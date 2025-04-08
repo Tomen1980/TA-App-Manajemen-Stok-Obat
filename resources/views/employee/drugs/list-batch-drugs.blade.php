@@ -69,9 +69,9 @@
                 <div class="w-full sm:w-48">
                     <select name="status" class="w-full px-3 py-2 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white">
                         <option value="" selected>All</option>
-                        <option value="usable" {{ request('status') == 'active' ? 'selected' : '' }}>Usable</option>
-                        <option value="ate" {{ request('status') == 'expired' ? 'selected' : '' }}>About to Expire</option>
-                        <option value="expired" {{ request('status') == 'low' ? 'selected' : '' }}>Expired</option>
+                        <option value="usable" {{ request('status') == 'usable' ? 'selected' : '' }}>Usable</option>
+                        <option value="ate" {{ request('status') == 'ate' ? 'selected' : '' }}>About to Expire</option>
+                        <option value="expired" {{ request('status') == 'expired' ? 'selected' : '' }}>Expired</option>
                     </select>
                 </div>
 
@@ -82,7 +82,7 @@
                             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                             </svg>
-                            Cari
+                            Search
                         </span>
                     </button>
                 </div>

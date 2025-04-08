@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\TransactionStatus;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -32,4 +33,5 @@ class MedicineMasterModel extends Model
     public function supplier(): HasOne{
         return $this->hasOne(SupplierModel::class,'id','supplier_id');
     }
+
 }

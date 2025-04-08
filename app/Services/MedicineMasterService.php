@@ -19,7 +19,7 @@ class MedicineMasterService {
         return $this->medicinRepository->findAll($page,$search,$categoryId);
     }
 
-    public function find(int $id){
+    public function findById(int $id){
         return $this->medicinRepository->findById($id);
     }
 

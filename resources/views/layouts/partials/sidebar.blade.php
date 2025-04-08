@@ -29,7 +29,7 @@
                 </a>
                 <ul id="transaction-dropdown" class="ml-6 mt-2 hidden">
                     <li class="mb-2">
-                        <a href="#" class="flex items-center p-2 hover:bg-blue-700 rounded">
+                        <a href="/employee/transaction-outgoing/" class="flex items-center p-2 hover:bg-blue-700 rounded">
                             Outgoing Transactions
                         </a>
                     </li>
@@ -54,11 +54,11 @@
                             Stock List
                         </a>
                     </li>
-                    <li class="mb-2">
+                    {{-- <li class="mb-2">
                         <a href="#" class="flex items-center p-2 hover:bg-blue-700 rounded">
                             Request for Additional Medication
                         </a>
-                    </li>
+                    </li> --}}
                 </ul>
             </li>
         @endif

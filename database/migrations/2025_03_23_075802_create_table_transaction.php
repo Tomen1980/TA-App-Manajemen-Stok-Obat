@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('transaction', function (Blueprint $table) {
             $table->id();
             $table->enum('type', ['in','out'])->default('in');
-            $table->integer('total_price');
+            $table->integer('total_price')->default(0);
             $table->date('date');
+            $table->enum('status',['arrears','paid'])->default('arrears');
             $table->bigInteger('user_id')->unsigned()->nullable(); // Pastikan tipe data sesuai
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();

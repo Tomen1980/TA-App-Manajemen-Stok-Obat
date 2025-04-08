@@ -37,7 +37,14 @@ Route::middleware("ValidationUser")->group(function () {
     Route::get("/employee/drugs/stock-list",[EmployeeController::class,"listdrugs"])->name("");
     Route::get("/employee/drugs/stock-list/{id}/batch-drugs",[EmployeeController::class,"listBatchDrugs"])->name("");
     Route::delete("/employee/drugs/stock-list/{id}/batch-drugs/{idBatch}",[EmployeeController::class,"deleteBatchDrugs"])->name("");
-    });
+    Route::get("/employee/transaction-outgoing/",[EmployeeController::class,"transactionOutgoing"])->name("");
+    Route::post("/employee/transaction-outgoing/",[EmployeeController::class,"transactionOutgoingAction"])->name("");
+    Route::get("/employee/transaction-outgoing/{id}",[EmployeeController::class,"transactionOutgoingForm"])->name("");
+    Route::get("/employee/transaction-outgoing/{id}/add-item",[EmployeeController::class, "transactionOutgoingAddItem"])->name("");
+    Route::post("/employee/transaction-outgoing/{id}/add-item",[EmployeeController::class, "transactionOutgoingAddActionItem"])->name("");
+    Route::delete("/employee/transaction-outgoing/{id}/item/{idItem}",[EmployeeController::class, "transactionOutgoingDeleteActionItem"])->name("");
+    Route::put("/employee/transaction-outgoing/{id}",[EmployeeController::class, "transactionOutgoingUpdateAction"])->name("");
+});
 
     Route::middleware("Role:manager")->group(function () {
     Route::get("/manager/dashboard",[ManagerController::class,"dashboard"])->name("manager.dashboard");

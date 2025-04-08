@@ -13,7 +13,7 @@ class MedicineMasterRepository {
     }
 
     public function findAll(int $page = 10, $search = null, $categoryId = null){
-        $query = $this->model->query();
+        $query = $this->model->with("batch_drugs","category","supplier");
     
         if ($search) {
             $query->where("name", "like", "%".$search."%");
