@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthenticateController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ManagerController;
+use App\Http\Controllers\PDFController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -37,6 +38,8 @@ Route::middleware("ValidationUser")->group(function () {
     Route::get("/employee/drugs/stock-list",[EmployeeController::class,"listdrugs"])->name("");
     Route::get("/employee/drugs/stock-list/{id}/batch-drugs",[EmployeeController::class,"listBatchDrugs"])->name("");
     Route::delete("/employee/drugs/stock-list/{id}/batch-drugs/{idBatch}",[EmployeeController::class,"deleteBatchDrugs"])->name("");
+
+    //transaction
     Route::get("/employee/transaction-outgoing/",[EmployeeController::class,"transactionOutgoing"])->name("");
     Route::post("/employee/transaction-outgoing/",[EmployeeController::class,"transactionOutgoingAction"])->name("");
     Route::get("/employee/transaction-outgoing/{id}",[EmployeeController::class,"transactionOutgoingForm"])->name("");
@@ -44,6 +47,14 @@ Route::middleware("ValidationUser")->group(function () {
     Route::post("/employee/transaction-outgoing/{id}/add-item",[EmployeeController::class, "transactionOutgoingAddActionItem"])->name("");
     Route::delete("/employee/transaction-outgoing/{id}/item/{idItem}",[EmployeeController::class, "transactionOutgoingDeleteActionItem"])->name("");
     Route::put("/employee/transaction-outgoing/{id}",[EmployeeController::class, "transactionOutgoingUpdateAction"])->name("");
+
+    //history transaction
+    Route::get("/employee/history-transaction-outgoing/",[EmployeeController::class,"historyTransactionOutgoing"])->name("");
+    Route::delete("/employee/history-transaction-outgoing/{id}",[EmployeeController::class,"deleteTransactionOutgoing"])->name("");
+
+    //Generate PDF
+    Route::post("/employee/history-transaction-outgoing/",[PDFController::class,"generateAllTransactionOutgoing"])->name("");
+    Route::post("/employee/get-one-transaction-outgoing/",[PDFController::class,"generateOneTransactionOutgoing"])->name("");
 });
 
     Route::middleware("Role:manager")->group(function () {

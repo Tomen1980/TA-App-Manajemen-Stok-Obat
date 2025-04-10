@@ -9,6 +9,7 @@ use App\Services\CategoryService;
 use App\Services\BatchDrugsService;
 use App\Services\TransactionService;
 use App\Services\TransactionItemService;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class EmployeeController extends Controller
 {
@@ -121,9 +122,30 @@ class EmployeeController extends Controller
     public function transactionOutgoingUpdateAction(Request $request){
         try{
             $this->transactionService->updateStatusOutgoingTransaction($request->id);
-            return redirect("/")->with("success","Successfully deleted item");
+            return redirect("/employee/history-transaction-outgoing/")->with("success","successfully submited transaction");
         }catch(\Exception $e){
             return redirect()->back()->with("error","Something went wrong");
         }
     }
+
+    // history transaction
+
+    public function historyTransactionOutgoing(Request $request){
+        $startDate = $request->start_date;
+        $endDate = $request->end_date;
+        $status = $request->status;
+        $data = $this->transactionService->findAllOutgoing($startDate,$endDate,$status,10);
+        return view("employee.transaction.history.history-transaction-outgoing",compact("data"));
+    }
+
+    public function deleteTransactionOutgoing($id){
+        try{
+            $this->transactionService->delete($id);
+            return redirect()->back()->with("success","success deleted transaction");
+        }
+        catch(\Exception $e){
+            return redirect()->back()->with("error","something went wrong ".$e->getMessage());
+        }
+    }
+
 }

@@ -34,7 +34,7 @@
                         </a>
                     </li>
                     <li class="mb-2">
-                        <a href="#" class="flex items-center p-2 hover:bg-blue-700 rounded">
+                        <a href="/employee/history-transaction-outgoing/" class="flex items-center p-2 hover:bg-blue-700 rounded">
                             Transaction History
                         </a>
                     </li>

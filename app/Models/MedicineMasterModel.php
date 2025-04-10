@@ -33,5 +33,4 @@ class MedicineMasterModel extends Model
     public function supplier(): HasOne{
         return $this->hasOne(SupplierModel::class,'id','supplier_id');
     }
-
 }

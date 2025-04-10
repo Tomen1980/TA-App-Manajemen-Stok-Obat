@@ -21,6 +21,10 @@ class TransactionService {
         return $this->transactionRepository->create($date);
     }
 
+    public function findAllOutgoing( ?string $startDate = null, ?string $endDate = null, ?string $status = null, ?int $paginate = null){
+        return $this->transactionRepository->findAll("out", $startDate, $endDate, $status, $paginate);
+    }
+
     public function findTransactionOutgoingById(int $id){
         return $this->transactionRepository->findTransactionOutgoingById($id);
     }
@@ -42,5 +46,9 @@ class TransactionService {
         //update status transaction
         return $this->transactionRepository->checkStatusTransaction($id);
         
+    }
+
+    public function delete(int $id){
+        $this->transactionRepository->delete($id);
     }
 }
