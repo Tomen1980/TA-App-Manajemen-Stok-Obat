@@ -68,8 +68,18 @@ class AuthenticateController extends Controller
                 'email' => 'required|email',
             ]);
             $data["id"] = Auth::user()->id;
+            
            $this->authService->updateProfile($data);
-            return redirect("/employee/change-profile")->with('success','Update Successful');
+            if(Auth::user()->role->value == UserRole::ADMIN->value ){
+                return redirect('/admin/change-profile')->with('success','Updated Successful');
+            }else if(Auth::user()->role->value == UserRole::EMPLOYEE->value){
+                return redirect('/employee/change-profile')->with('success','Updated Successful');
+            }else if(Auth::user()->role->value == UserRole::MANAGER->value){
+                return redirect('/manager/change-profile')->with('success','Updated Successful');
+            }else {
+                return redirect()->back()->with('error', 'Login failed');
+            }
+
         }catch(\Exception $e){
             return redirect()->back()->with('error', $e->getMessage());
         }
@@ -83,7 +93,15 @@ class AuthenticateController extends Controller
                 'confirm_password' =>'required',
             ]);
             $this->authService->changePassword($data);
-            return redirect("/employee/change-profile")->with('success','Update Successful');
+            if(Auth::user()->role->value == UserRole::ADMIN->value ){
+                return redirect('/admin/change-profile')->with('success','Updated Successful');
+            }else if(Auth::user()->role->value == UserRole::EMPLOYEE->value){
+                return redirect("/employee/change-profile")->with('success','Updated Successful');
+            }else if(Auth::user()->role->value == UserRole::MANAGER->value){
+                return redirect('/manager/change-profile')->with('success','Updated Successful');
+            }else {
+                return redirect()->back()->with('error', 'Login failed');
+            }
         }
         catch(\Exception $e){
             return redirect()->back()->with('error', $e->getMessage());

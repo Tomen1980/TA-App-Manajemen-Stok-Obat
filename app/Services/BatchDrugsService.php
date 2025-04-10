@@ -17,4 +17,9 @@ class BatchDrugsService {
         return $this->BatchDrugsRepository->deleteById($id);
     }
 
+
+    public function calculateBatchStock(?string $type = null){
+        return $this->BatchDrugsRepository->calculateBatchStock($type);
+    }
+
 }

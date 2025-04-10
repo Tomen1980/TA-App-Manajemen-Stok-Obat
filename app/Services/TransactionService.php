@@ -25,6 +25,10 @@ class TransactionService {
         return $this->transactionRepository->findAll("out", $startDate, $endDate, $status, $paginate);
     }
 
+    public function findStatusTransactionOutgoing(string $status){
+        return $this->transactionRepository->findStatusTransactionOutgoing("out",$status);
+    }
+
     public function findTransactionOutgoingById(int $id){
         return $this->transactionRepository->findTransactionOutgoingById($id);
     }

@@ -12,7 +12,7 @@ class MedicineMasterRepository {
         $this->model = $model;
     }
 
-    public function findAll(int $page = 10, $search = null, $categoryId = null){
+    public function findAll(?int $page = null, $search = null, $categoryId = null){
         $query = $this->model->with("batch_drugs","category","supplier");
     
         if ($search) {
@@ -22,8 +22,11 @@ class MedicineMasterRepository {
         if ($categoryId) {
             $query->where("category_id", $categoryId);
         }
+        if(isset($page)){
+            return $query->paginate($page);
+        }
+        return $query->get();
         
-        return $query->paginate($page);
     }
 
     public function findById(int $id){

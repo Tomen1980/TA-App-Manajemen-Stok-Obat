@@ -29,8 +29,34 @@ class EmployeeController extends Controller
         $this->transactionItemService = $transactionItemService;
     }   
 
+
     public function dashboard(){
-        return view("employee.dashboard");
+        $allTransactionOut = $this->transactionService->findAllOutgoing()->count();
+        $paidTransaction = $this->transactionService->findStatusTransactionOutgoing("paid")->count();
+        $arrearsTransaction = $this->transactionService->findStatusTransactionOutgoing("arrears")->count();
+
+        $allMedicine = $this->medicineService->findAll()->count();
+        $totalStockBatch = $this->batchDrugsService->calculateBatchStock();
+        $expiredStockBatch = $this->batchDrugsService->calculateBatchStock("expired");
+        $usableStockBatch = $this->batchDrugsService->calculateBatchStock("usable");
+        $ateStockBatch = $this->batchDrugsService->calculateBatchStock("ate");
+        
+        $data = [
+            "all_transaction" => $allTransactionOut,
+            "paid_transaction" => $paidTransaction,
+            "paid_transaction_percent" => $allTransactionOut > 0 ? round(($paidTransaction / $allTransactionOut * 100)) : 0,
+            "arrears_transaction" => $arrearsTransaction,
+            "arrears_transaction_percent" => $allTransactionOut > 0 ? round(($arrearsTransaction / $allTransactionOut * 100)) : 0,
+            "all_medicine" => $allMedicine,
+            "expired_batch_stock" => $expiredStockBatch,
+            "expired_batch_stock_percent" => $totalStockBatch > 0? round(($expiredStockBatch / $totalStockBatch * 100)) : 0,
+            "usable_batch_stock" => $usableStockBatch,
+            "usable_batch_stock_percent" => $totalStockBatch > 0? round(($usableStockBatch / $totalStockBatch * 100)) : 0,
+            "ate_batch_stock" => $ateStockBatch,
+            "ate_batch_stock_percent" => $totalStockBatch > 0? round(($ateStockBatch / $totalStockBatch * 100)) : 0,
+
+        ];
+        return view("employee.dashboard",compact("data"));
     }
 
     // Drugs

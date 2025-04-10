@@ -10,7 +10,7 @@
 
     <!-- Logo atau Judul -->
     <div class="p-4 text-2xl font-bold border-b border-blue-700">
-        <a href="">
+        <a href="/{{Auth::user()->role->value}}/dashboard">
             Dashboard {{ Auth::user()->name}}
         </a>
     </div>

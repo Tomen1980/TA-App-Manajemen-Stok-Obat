@@ -53,6 +53,12 @@ class TransactionRepository {
         }
     }
 
+    public function findStatusTransactionOutgoing(string $type,string $status){
+        $query = $this->model->with("user", "transactionsItem", "transactionsItem.batchDrug", "transactionsItem.batchDrug.medicineMaster")
+            ->where("type", $type)->where("status", $status);
+        return $query->get();
+    }
+
     public function findTransactionOutgoingById(int $id){
         return $this->model->with("user","transactionsItem","transactionsItem.batchDrug","transactionsItem.batchDrug.medicineMaster")->where("type","out")->find($id);
     }

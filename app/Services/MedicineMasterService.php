@@ -15,7 +15,7 @@ class MedicineMasterService {
     }
 
 
-    public function findAll(int $page = 10, $search = null, $categoryId = null){
+    public function findAll(?int $page = null, $search = null, $categoryId = null){
         return $this->medicinRepository->findAll($page,$search,$categoryId);
     }
 
