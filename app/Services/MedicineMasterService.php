@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Repositories\MedicineMasterRepository;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Auth;
+use function PHPUnit\Framework\assertArrayIsIdenticalToArrayOnlyConsideringListOfKeys;
 
 class MedicineMasterService {
 
@@ -49,5 +50,7 @@ class MedicineMasterService {
     
     return $medicine;
 }
-
+    public function findMedicineWithExpiredBatch(){
+        return $this->medicinRepository->findMedicineWithExpiredBatch();
+    }
 }

@@ -6,6 +6,8 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\UserController;
+use App\Notifications\ExampleNotification;
+use App\Services\MedicineMasterService;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -63,4 +65,10 @@ Route::middleware("ValidationUser")->group(function () {
 
 
     Route::delete("/auth/logout",[AuthenticateController::class,"logout"])->name("logout");
+});
+
+//notification telegram
+Route::get("/form-submit",function(MedicineMasterService $MedicineMasterService){
+    $id_group = config("services.telegram-bot-api.id_group");
+    Notification::route("telegram",$id_group)->notify(new ExampleNotification($MedicineMasterService));
 });

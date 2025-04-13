@@ -32,4 +32,11 @@ class MedicineMasterRepository {
     public function findById(int $id){
         return $this->model->with("batch_drugs","category","supplier")->find($id);
     }
+
+    public function findMedicineWithExpiredBatch(){
+        return $this->model->with(["batch_drugs"=>function($query){
+            $query->where("expired_date","<=",now()->format('Y-m-d'));
+        }])->get();
+    }
+
 }
