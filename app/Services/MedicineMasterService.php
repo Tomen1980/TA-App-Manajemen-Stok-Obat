@@ -50,7 +50,7 @@ class MedicineMasterService {
     
     return $medicine;
 }
-    public function findMedicineWithExpiredBatch(){
-        return $this->medicinRepository->findMedicineWithExpiredBatch();
+    public function findMedicineWithExpiredBatch(?int $paginate = null, ?string $search = null){
+        return $this->medicinRepository->findMedicineWithExpiredBatch($paginate,$search);
     }
 }

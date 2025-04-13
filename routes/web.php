@@ -35,11 +35,14 @@ Route::middleware("ValidationUser")->group(function () {
     Route::get("/employee/change-profile",[AuthenticateController::class,"formChangeProfile"])->name("");
     Route::put("/employee/update/change-profile",[AuthenticateController::class,"changeProfile"])->name("");
     Route::put("/employee/update/change-password",[AuthenticateController::class,"changePassword"])->name("");
-
+    
     //drugs
     Route::get("/employee/drugs/stock-list",[EmployeeController::class,"listdrugs"])->name("");
     Route::get("/employee/drugs/stock-list/{id}/batch-drugs",[EmployeeController::class,"listBatchDrugs"])->name("");
     Route::delete("/employee/drugs/stock-list/{id}/batch-drugs/{idBatch}",[EmployeeController::class,"deleteBatchDrugs"])->name("");
+    Route::get("/employee/drugs/expired",[EmployeeController::class,"expiredBatchDrugs"])->name("");
+    Route::delete("/employee/drugs/expired/{id}",[EmployeeController::class,"deleteExpiredBatchDrugs"])->name("");
+    Route::delete("/employee/drugs/expired/",[EmployeeController::class,"deleteAllExpiredBatchDrugs"])->name("");
 
     //transaction
     Route::get("/employee/transaction-outgoing/",[EmployeeController::class,"transactionOutgoing"])->name("");
@@ -67,8 +70,3 @@ Route::middleware("ValidationUser")->group(function () {
     Route::delete("/auth/logout",[AuthenticateController::class,"logout"])->name("logout");
 });
 
-//notification telegram
-Route::get("/form-submit",function(MedicineMasterService $MedicineMasterService){
-    $id_group = config("services.telegram-bot-api.id_group");
-    Notification::route("telegram",$id_group)->notify(new ExampleNotification($MedicineMasterService));
-});

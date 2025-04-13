@@ -22,4 +22,8 @@ class BatchDrugsService {
         return $this->BatchDrugsRepository->calculateBatchStock($type);
     }
 
+    public function deleteAllExpired(){
+        return $this->BatchDrugsRepository->deleteAllExpired();
+    }
+
 }

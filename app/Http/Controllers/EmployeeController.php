@@ -174,4 +174,32 @@ class EmployeeController extends Controller
         }
     }
 
+    public function expiredBatchDrugs(Request $request){
+        try{
+        $search = $request->input('search');
+        $data = $this->medicineService->findMedicineWithExpiredBatch(10,$search);
+        return view("employee.drugs.drugs-expired",compact("data"));
+        }catch(\Exception $e){
+            return redirect()->back()->with("error","Something went wrong");
+        }
+    }
+
+    public function deleteExpiredBatchDrugs($id, Request $request){
+     try{
+      $this->batchDrugsService->delete($id);
+      return redirect()->back()->with("success","Batch deleted successfully");
+     }catch(\Exception $e){
+        return redirect()->back()->with("error","Something went wrong");
+     }
+    }
+
+    public function deleteAllExpiredBatchDrugs(){
+        try{
+            $this->batchDrugsService->deleteAllExpired();
+            return redirect()->back()->with("success","All Batch deleted successfully");
+        }catch(\Exception $e){
+        return redirect()->back()->with("error","Something went wrong");
+        }
+    }
+
 }

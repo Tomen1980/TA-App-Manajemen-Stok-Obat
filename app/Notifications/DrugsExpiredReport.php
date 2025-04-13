@@ -58,6 +58,7 @@ class DrugsExpiredReport extends Notification
                         $message .= "\n  Total: {$batch->batch_stock} stock";
                     }
                 }
+                 $message .= "\n";
             }
             $id_group = config("services.telegram-bot-api.id_group");
 

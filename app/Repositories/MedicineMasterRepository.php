@@ -33,10 +33,31 @@ class MedicineMasterRepository {
         return $this->model->with("batch_drugs","category","supplier")->find($id);
     }
 
-    public function findMedicineWithExpiredBatch(){
-        return $this->model->with(["batch_drugs"=>function($query){
-            $query->where("expired_date","<=",now()->format('Y-m-d'));
-        }])->get();
-    }
+    public function findMedicineWithExpiredBatch(?int $paginate = null, ?string $search = null)
+        {
+            $query = $this->model->whereHas('batch_drugs', function($query) {
+                    $query->where('expired_date', '<=', now()->format('Y-m-d'));
+                })
+                ->with(['batch_drugs' => function($query) {
+                    $query->where('expired_date', '<=', now()->format('Y-m-d'))
+                        ->orderBy('expired_date', 'asc');
+                }]);
+
+            if ($search) {
+                $query->where(function($q) use ($search) {
+                    $q->where('name', 'like', '%'.$search.'%')
+                    ->orWhere('id', 'like', '%'.$search.'%')
+                    ->orWhereHas('batch_drugs', function($q) use ($search) {
+                        $q->where('no_batch', 'like', '%'.$search.'%');
+                    });
+                });
+            }
+
+            if (isset($paginate)) {
+                return $query->paginate($paginate);
+            }
+            
+            return $query->get();
+        }
 
 }

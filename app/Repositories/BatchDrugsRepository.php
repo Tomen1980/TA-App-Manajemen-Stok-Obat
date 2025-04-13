@@ -36,4 +36,14 @@ class BatchDrugsRepository {
         }
         return $this->model->sum('batch_stock');
     }
+
+    public function deleteAllExpired(){
+     $expiredBatches = $this->model->where('expired_date', '<=', now())->get();
+    
+    foreach ($expiredBatches as $batch) {
+        $batch->delete(); // Ini akan memicu event deleted
+    }
+    
+    return $expiredBatches->count();
+    }
 }

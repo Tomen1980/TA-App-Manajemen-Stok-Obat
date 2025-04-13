@@ -54,6 +54,14 @@ class BatchDrugsSeeder extends Seeder
             'medicine_id' => 5
         ]);
         BatchDrugsModel::create([
+            "no_batch" => "12Jan15",
+            'production_date' => "2015-01-01",
+            'expired_date' => "2023-01-01",
+            'batch_stock' => 100,
+            'purchase_price' => 10000,
+            'medicine_id' => 5
+        ]);
+        BatchDrugsModel::create([
             "no_batch" => "12Jan14",
             'production_date' => "2023-01-01",
             'expired_date' => "2024-01-01",

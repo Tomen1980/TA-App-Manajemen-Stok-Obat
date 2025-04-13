@@ -54,11 +54,11 @@
                             Stock List
                         </a>
                     </li>
-                    {{-- <li class="mb-2">
-                        <a href="#" class="flex items-center p-2 hover:bg-blue-700 rounded">
-                            Request for Additional Medication
+                    <li class="mb-2">
+                        <a href="/employee/drugs/expired" class="flex items-center p-2 hover:bg-blue-700 rounded">
+                            Stock Expired
                         </a>
-                    </li> --}}
+                    </li>
                 </ul>
             </li>
         @endif
