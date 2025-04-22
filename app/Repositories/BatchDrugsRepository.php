@@ -46,4 +46,15 @@ class BatchDrugsRepository {
     
     return $expiredBatches->count();
     }
+
+    public function storeBatchDrugs($data,$id){
+        $this->model->create([
+            'no_batch' => $data['no_batch'],
+            'production_date' => $data['production_date'],
+            'expired_date' => $data['expired_date'],
+            'batch_stock' => $data['batch_stock'],
+            'purchase_price' => $data['purchase_price'],
+            'medicine_id' => $id,
+        ]);
+    }
 }

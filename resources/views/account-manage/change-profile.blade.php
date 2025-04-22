@@ -15,8 +15,15 @@
 
         <!-- Form Section -->
         <div class="p-6">
+
+            @if (Auth::user()->role->value == 'employee')
+                <form action="/employee/update/change-profile" method="POST" class="mt-4">
+            @elseif (Auth::user()->role->value == 'admin')
+                <form action="/admin/update/change-profile" method="POST" class="mt-4">
+            @elseif (Auth::user()->role->value == 'manager')
+                <form action="/manager/update/change-profile" method="POST" class="mt-4">
+            @endif
             
-            <form action="/employee/update/change-profile" method="POST">
                 @csrf
                 @method('PUT')
 
@@ -36,7 +43,6 @@
                            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                            required>
                 </div>
-
                 <!-- Submit Button -->
                 <div class="flex justify-between items-center">
                     <button type="submit"
@@ -55,6 +61,7 @@
     </div>
 </div>
 
+
 <!-- Change Password Modal -->
 <div id="passwordModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden">
     <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
@@ -62,16 +69,16 @@
             <h3 class="text-lg leading-6 font-medium text-gray-900">Change Password</h3>
             
             @if (Auth::user()->role->value == 'employee')
-            <form action="/employee/update/change-password" method="POST" class="mt-4">
-        @elseif (Auth::user()->role->value == 'admin')
-            <form action="/admin/update/change-password" method="POST" class="mt-4">
-        @elseif (Auth::user()->role->value == 'manager')
-             <form action="/manager/update/change-password" method="POST" class="mt-4">
-        @endif
+                <form action="/employee/update/change-password" method="POST" class="mt-4">
+            @elseif (Auth::user()->role->value == 'admin')
+                <form action="/admin/update/change-password" method="POST" class="mt-4">
+            @elseif (Auth::user()->role->value == 'manager')
+                <form action="/manager/update/change-password" method="POST" class="mt-4">
+            @endif
+            
             
                 @csrf
                 @method('PUT')
-                
                 <!-- Current Password -->
                 <div class="mb-4 text-left">
                     <label for="current_password" class="block text-gray-700 text-sm font-bold mb-2">Current Password</label>
@@ -82,7 +89,7 @@
                        @enderror
                     </div>
                 
-                
+                  
                 <!-- New Password -->
                 <div class="mb-4 text-left">
                     <label for="new_password" class="block text-gray-700 text-sm font-bold mb-2">New Password</label>

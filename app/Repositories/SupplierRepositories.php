@@ -1,14 +1,14 @@
 <?php
 namespace App\Repositories;
 
-use App\Models\CategoryModel;
+use App\Models\SupplierModel;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 
-class CategoryRepository {
+class SupplierRepositories {
     protected $model;
 
-    public function __construct(CategoryModel $model){
+    public function __construct(SupplierModel $model){
         $this->model = $model;
     }
 
@@ -32,12 +32,22 @@ class CategoryRepository {
     public function create(array $data){
         return $this->model->create($data);
     }
+
     public function update(int $id, array $data){
-        return $this->model->find($id)->update($data);
+        $supplier = $this->model->find($id);
+        if($supplier){
+            $supplier->update($data);
+            return $supplier;
+        }
+        return null;
     }
 
-
     public function delete(int $id){
-        return $this->model->find($id)->delete();
+        $supplier = $this->model->find($id);
+        if($supplier){
+            $supplier->delete();
+            return true;
+        }
+        return false;
     }
 }

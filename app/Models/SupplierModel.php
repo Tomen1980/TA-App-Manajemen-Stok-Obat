@@ -12,7 +12,7 @@ class SupplierModel extends Model
         'name',
         'address',
         'contact',
-        'status'
+        // 'status'
     ];
 
     public $timestamps = true;

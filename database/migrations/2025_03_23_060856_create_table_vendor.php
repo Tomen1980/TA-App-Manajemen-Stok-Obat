@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('address');
             $table->string('contact');
-            $table->enum('status', ['waiting', 'approve','decline'])->default('waiting');
+            // $table->enum('status', ['waiting', 'approve','decline'])->default('waiting');
             $table->timestamps();
         });
     }

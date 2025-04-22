@@ -11,13 +11,25 @@ class UserRepository {
     public function __construct(User $model) 
     { $this->model = $model; }
 
-    public function all()
+    public function all(?int $page = null, ?string $search = null)
     {
-        return $this->model->all();
+
+        $query =  $this->model->newQuery();
+    
+        if ($search) {
+            $query->where("name", "like", "%".$search."%")->where("id","!=",Auth::user()->id);;
+        }else{
+            $query->where("id","!=",Auth::user()->id);
+        }
+        
+        if(isset($page)){
+            return $query->paginate($page);
+        }
+        return $query->get();
     }
 
     public function create(array $data){
-        $user = $this->model->create($data);
+        return $this->model->create($data);
     }
 
     public function findEmail(string $email){
@@ -35,5 +47,22 @@ class UserRepository {
         $user = $this->model->find(Auth::user()->id);
         $user->password = bcrypt($data["password"]);
         $user->save();
+    }
+
+    public function find(int $id){
+        return $this->model->find($id);
+    }
+
+    public function update(array $data, int $id){
+        $user = $this->model->find($id);
+        $user->name = $data["name"];
+        $user->email = $data["email"];
+        $user->password = bcrypt($data["password"]);
+        $user->save();
+    }
+
+    public function delete(int $id){
+        $user = $this->model->find($id);
+        $user->delete();
     }
 }

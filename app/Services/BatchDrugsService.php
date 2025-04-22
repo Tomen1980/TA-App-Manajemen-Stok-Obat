@@ -26,4 +26,8 @@ class BatchDrugsService {
         return $this->BatchDrugsRepository->deleteAllExpired();
     }
 
+    public function storeBatchDrugs($data,$medicineId){
+        return $this->BatchDrugsRepository->storeBatchDrugs($data,$medicineId);
+    }
+
 }
