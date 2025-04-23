@@ -6,6 +6,7 @@ use App\Repositories\TransactionRepository;
 use App\Repositories\BatchDrugsRepository;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 
 class TransactionService {
 
@@ -43,7 +44,15 @@ class TransactionService {
             $this->batchDrugsRepository->reduceStock($item->batch_drug_id,$item->item_amount);
         }
         // update status transaction
-        return $this->transactionRepository->updateStatusTransactionOutgoing($id);
+        $this->transactionRepository->updateStatusTransactionOutgoing($id);
+        $dataChain = $this->transactionRepository->findTransactionForBlockChain($id);
+        Http::withHeaders([
+            'Accept' => 'application/json',
+            'Content-Type' => 'application/json',
+        ])->post('http://127.0.0.1:8080/api/blocks', [
+            'data' => json_encode($dataChain),
+        ]);
+
     }
 
     public function checkStatusTransaction(int $id){
@@ -54,5 +63,9 @@ class TransactionService {
 
     public function delete(int $id){
         $this->transactionRepository->delete($id);
+    }
+
+    public function findTransactionForBlockChain(int $id){
+        return $this->transactionRepository->findTransactionForBlockChain($id);
     }
 }

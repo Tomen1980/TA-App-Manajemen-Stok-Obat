@@ -60,7 +60,7 @@ Route::middleware("ValidationUser")->group(function () {
     //Generate PDF
     Route::post("/employee/history-transaction-outgoing/",[PDFController::class,"generateAllTransactionOutgoing"])->name("");
     Route::post("/employee/get-one-transaction-outgoing/",[PDFController::class,"generateOneTransactionOutgoing"])->name("");
-});
+    });
 
     Route::middleware("Role:manager")->group(function () {
     Route::get("/manager/dashboard",[ManagerController::class,"dashboard"])->name("manager.dashboard");
