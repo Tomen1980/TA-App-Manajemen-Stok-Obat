@@ -105,8 +105,17 @@
                             Available: <span class="available-stock">{{ $medicine->batch_drugs->first()->batch_stock ?? 0 }}</span>
                         </p>
                     </div>
-                    
-                    <button type="submit" class="w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-700">
+                    @php
+                        // Ambil batch valid (stok > 0 dan belum expired)
+                        $validBatches = $medicine->batch_drugs->filter(function($batch) {
+                            return \Carbon\Carbon::parse($batch->expired_date)->isFuture() && $batch->batch_stock > 0;
+                        });
+                        $hasValidBatch = $validBatches->isNotEmpty();
+                    @endphp
+
+                    <button type="submit"
+                            class="w-full {{ $hasValidBatch ? 'bg-green-600 hover:bg-green-700' : 'bg-gray-500 cursor-not-allowed' }} text-white py-2 rounded-md"
+                            {{ $hasValidBatch ? '' : 'disabled' }}>
                         Checkout
                     </button>
                 </form>
