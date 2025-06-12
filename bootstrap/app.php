@@ -2,6 +2,7 @@
 
 use App\Http\Middleware\CheckRole;
 use App\Http\Middleware\IfLogin;
+use App\Http\Middleware\PreserveEmailWhitespace;
 use App\Http\Middleware\ValidationUser;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -17,7 +18,8 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'ValidationUser' => ValidationUser::class,
             'IfLogin' => IfLogin::class,
-            'Role' => CheckRole::class
+            'Role' => CheckRole::class,
+           "preserver.email" => PreserveEmailWhitespace::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
