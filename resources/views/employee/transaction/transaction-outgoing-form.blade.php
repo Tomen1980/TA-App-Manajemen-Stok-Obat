@@ -52,11 +52,11 @@
                        class="w-full sm:w-auto px-3 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
                         Add Medicine
                     </a>
-                @else
+                {{-- @else
                     <button disabled
                             class="w-full sm:w-auto px-3 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm bg-gray-400 text-white rounded-md opacity-50 cursor-not-allowed">
                         Add Medicine
-                    </button>
+                    </button> --}}
                 @endif
                 </div>
 
@@ -118,8 +118,8 @@
 
             <!-- Form Actions -->
             <div class="px-3 py-3 sm:px-6 sm:py-4 bg-gray-50 flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-3">
-                <a href="/employee/transaction-outgoing/" class="w-full sm:w-auto px-3 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm border border-gray-300 rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    Cancel
+                <a href={{$data->status === TransactionStatus::PAID->value ? "/employee/history-transaction-outgoing/" : "/employee/transaction-outgoing/"}} class="w-full sm:w-auto px-3 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm border border-gray-300 rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    {{$data->status === TransactionStatus::PAID->value ? "Kembali" : "Cancel"}} 
                 </a>
                 @if($data->status === 'arrears')
                 <form action="" method="POST">
