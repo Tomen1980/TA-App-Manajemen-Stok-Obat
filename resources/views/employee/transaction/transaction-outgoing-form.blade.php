@@ -125,7 +125,7 @@
                 <form action="" method="POST">
                     @csrf
                     @method('PUT') 
-                    <button type="submit" class="w-full sm:w-auto px-3 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm border border-transparent rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <button type="submit" class="w-full sm:w-auto px-3 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm border border-transparent rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 {{$itemCount === 0 ? 'opacity-50 cursor-not-allowed bg-gray-500' : ''}} " {{$itemCount === 0 ? 'disabled' : ''}}>
                         Submit Transaction
                     </button>
                 </form>

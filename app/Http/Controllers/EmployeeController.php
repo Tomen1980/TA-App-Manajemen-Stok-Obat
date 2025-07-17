@@ -94,7 +94,7 @@ class EmployeeController extends Controller
                 "transaction_date" => "required|date",
             ]);
             $data = $this->transactionService->create($data["transaction_date"]);
-            return redirect("/employee/transaction-outgoing/".$data["id"])->with("success","");
+            return redirect("/employee/transaction-outgoing/".$data["id"])->with("success","Success created transaction");
         }catch(\Exception $e){
             return redirect()->back()->with("error","Something went wrong: ". $e->getMessage());
         }
@@ -103,7 +103,8 @@ class EmployeeController extends Controller
     public function transactionOutgoingForm(Request $request){
         $idParam = $request->id;
         $data = $this->transactionService->findTransactionOutgoingById($idParam);
-        return view("employee.transaction.transaction-outgoing-form",compact("data","idParam"));
+        $itemCount = $data->transactionsItem()->count();
+        return view("employee.transaction.transaction-outgoing-form",compact("data","idParam","itemCount"));
     }
 
     public function transactionOutgoingAddItem(Request $request){
