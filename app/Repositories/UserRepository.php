@@ -19,6 +19,23 @@ class UserRepository {
     public function create(array $data){
         $user = $this->model->create($data);
     }
+    public function delete($id)
+    {
+        $user = $this->model->findOrFail($id);
+        return $user->delete();
+    }
+    public function update($id, array $data)
+    {
+        $user = $this->model->findOrFail($id);
+        $user->update($data);
+        return $user;
+    }
+    public function getById($id)
+{
+    return $this->model->findOrFail($id);
+}
+
+
 
     public function findEmail(string $email){
         return $this->model->where("email", $email)->first();
@@ -36,4 +53,5 @@ class UserRepository {
         $user->password = bcrypt($data["password"]);
         $user->save();
     }
+
 }

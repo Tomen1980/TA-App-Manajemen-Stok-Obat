@@ -15,6 +15,10 @@ class UserService {
         return $this->userRepository->all();
     }
 
+    public function getUserbyId($id){
+        return $this->userRepository->getById($id);
+    }
+
     public function createUsers(array $data){
         try{
             $user = $this->userRepository->create($data);
@@ -23,6 +27,20 @@ class UserService {
             return $e->getMessage();
         }
     }
-
-    
+    public function deleteUser($id)
+    {
+        try {
+            return $this->userRepository->delete($id);
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+    }
+    public function updateUser($id, array $data){
+        try{
+            $user = $this->userRepository->update($id, $data);
+            return $user;
+        }catch(\Exception $e){
+            return $e->getMessage();
+        }
+    }
 }

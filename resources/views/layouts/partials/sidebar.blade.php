@@ -62,6 +62,48 @@
                 </ul>
             </li>
         @endif
+        @if (Auth::user()->role->value == 'manager')
+            <!-- Menu Transaction -->
+            <li class="mb-2">
+                <a href="/manager/history" class="flex items-center p-2 hover:bg-blue-700 rounded" onclick="toggleDropdown('transaction-dropdown')">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-8-4v8m-6-8v8m10-8v8" />
+                    </svg>
+                    Transaction History
+                </a>
+            </li>
+            <!-- add employee -->
+            <li class="mb-2">
+                <a href="/manager/users" class="flex items-center p-2 hover:bg-blue-700 rounded">                    
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">    
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Add Employee
+                </a>
+            </li>
+            <!-- Menu Drugs -->
+            <li class="mb-2">
+                <a href="#" class="flex items-center p-2 hover:bg-blue-700 rounded" onclick="toggleDropdown('drugs-dropdown')">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                    </svg>
+                    Drugs
+                </a>
+                <ul id="drugs-dropdown" class="ml-6 mt-2 hidden">
+                    <li class="mb-2">
+                        <a href="/manager/DrugList" class="flex items-center p-2 hover:bg-blue-700 rounded">
+                            Stock List
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="/manager/DrugExpired/" class="flex items-center p-2 hover:bg-blue-700 rounded">
+                            Stock Expired
+                        </a>
+                    </li>
+                </ul>                
+            </li>
+            
+        @endif
              <!-- Menu Account -->
              <li class="mb-2">
                 <a href="#" class="flex items-center p-2 hover:bg-blue-700 rounded" onclick="toggleDropdown('account-dropdown')">
@@ -84,6 +126,8 @@
                             <a href="/manager/change-profile" class="flex items-center p-2 hover:bg-blue-700 rounded">
                                 Account
                             </a>
+                            {{-- <a href="/manager/users" class="flex items-center p-2 hover:bg-blue-700 rounded">
+                            Employee List</a> --}}
                         @endif
                     </li>
                     <li class="mb-2">
@@ -97,6 +141,8 @@
                     </li>
                 </ul>
             </li>
+            {{-- <a href="/manager/users" class="flex items-center p-2 hover:bg-blue-700 rounded">
+            Employee List</a> --}}
         </ul>
     </nav>
 </div>

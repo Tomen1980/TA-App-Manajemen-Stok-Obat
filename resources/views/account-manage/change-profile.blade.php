@@ -16,7 +16,7 @@
         <!-- Form Section -->
         <div class="p-6">
             
-            <form action="/employee/update/change-profile" method="POST">
+            <form action="/manager/update/change-profile" method="POST">
                 @csrf
                 @method('PUT')
 

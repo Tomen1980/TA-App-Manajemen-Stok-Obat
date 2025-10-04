@@ -13,7 +13,7 @@ class MedicineMasterSeeder extends Seeder
      */
     public function run(): void
     {
-        MedicineMasterModel::create([
+        $medicine = MedicineMasterModel::create([
             "name" => "Paracetamol",
             "stock" => 0,
             "min_stock" => 10,
@@ -67,6 +67,7 @@ class MedicineMasterSeeder extends Seeder
             "category_id" => 4,
             "supplier_id"=> 4
             ]);
+
 
 
     }

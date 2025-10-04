@@ -19,7 +19,7 @@ class BatchDrugsSeeder extends Seeder
             'expired_date' => "2028-01-01",
             'batch_stock' => 100,
             'purchase_price' => 10000,
-            'medicine_id' => 1
+            'medicine_id' => 2
         ]);
         BatchDrugsModel::create([
             "no_batch" => "12Jan14",
@@ -67,7 +67,7 @@ class BatchDrugsSeeder extends Seeder
             'expired_date' => "2024-01-01",
             'batch_stock' => 50,
             'purchase_price' => 10000,
-            'medicine_id' => 1
+            'medicine_id' => 6
         ]);
     }
 }
