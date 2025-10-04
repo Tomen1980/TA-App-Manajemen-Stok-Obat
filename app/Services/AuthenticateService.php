@@ -25,18 +25,29 @@ class AuthenticateService {
 
     }
 
-    public function updateProfile(array $data){
-        if(Auth::user()->email == $data['email']){
+    public function updateProfile(array $data)
+        {
+            // Validasi jika ada spasi di mana pun pada email
+            if (preg_match('/\s/', $data['email'])) {
+                throw ValidationException::withMessages([
+                    'email' => 'Email should not contain any spaces.',
+                ]);
+            }
+
+            if (Auth::user()->email == $data['email']) {
+                return $this->userRepository->updateProfile($data);
+            }
+
+            $checkEmail = $this->userRepository->findEmail($data["email"]);
+            if ($checkEmail) {
+                throw ValidationException::withMessages([
+                    'email' => 'Email has already been taken.',
+                ]);
+            }
+
             return $this->userRepository->updateProfile($data);
         }
-        $checkEmail = $this->userRepository->findEmail($data["email"]);
-        if($checkEmail){
-            throw ValidationException::withMessages([
-                'message' => 'Email has been taken',
-            ]);
-        }
-        return $this->userRepository->updateProfile($data);
-    }
+
 
     public function changePassword(array $data){
         $user = Auth::user();

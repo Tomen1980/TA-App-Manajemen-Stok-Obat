@@ -77,4 +77,27 @@ class TransactionRepository {
         throw new \Exception("Item not found");
     }
 
+    public function findTransactionForBlockChain(int $id){
+        return $this->model->with([
+            "user" => function($query){
+                $query->select("id","name");
+            },
+        "transactionsItem" => function($query){
+            $query->select("id","transaction_id","batch_drug_id","item_amount","total_price");
+        },"transactionsItem.batchDrug" => function($query){
+            $query->select("id","medicine_id","no_batch");
+        }
+        ,"transactionsItem.batchDrug.medicineMaster" =>function ($query){
+            $query->select("id","name","price");
+        }
+        ])
+        ->select( 
+            'id', // Pastikan primary key ada
+        'type', 
+        'total_price', 
+        'status', 
+        'created_at')
+        ->where("type","out")->find($id);
+    }
+
 }

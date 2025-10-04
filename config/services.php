@@ -38,5 +38,8 @@ return [
         'token' => env('TELEGRAM_BOT_TOKEN'),
         'id_group' => env('TELEGRAM_GRUP_ID')
     ],
-
+    'api-communication' => [
+        'token' => env('API_COMMUNICATION_TOKEN'),
+        'url' => env('API_COMMUNICATION_URL')
+    ] 
 ];
